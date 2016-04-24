@@ -4,17 +4,16 @@ import com.karumi.rosie.view.Presenter;
 import com.karumi.rosie.view.RosieActivity;
 import es.olidroide.notepad.R;
 import es.olidroide.notepad.main.NotepadModule;
-import es.olidroide.notepad.main.NotepadPresenter;
 import es.olidroide.notepad.notes.view.NotesActivity;
 import java.util.Collections;
 import java.util.List;
 import javax.inject.Inject;
 
-public class NotepadActivity extends RosieActivity implements NotepadPresenter.View {
+public class NotepadActivity extends RosieActivity implements NotepadActivityPresenter.View {
 
     @Inject
     @Presenter
-    NotepadPresenter notepadPresenter;
+    NotepadActivityPresenter notepadActivityPresenter;
 
     @Override protected List<Object> getActivityScopeModules() {
         return Collections.singletonList((Object) new NotepadModule());
