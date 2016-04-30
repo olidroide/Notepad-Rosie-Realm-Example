@@ -46,6 +46,10 @@ public class Note implements Identifiable<String> {
         private String name;
         private String note;
 
+        public static Builder create() {
+            return new Builder();
+        }
+
         public Builder setKey(String key) {
             this.key = key;
             return this;

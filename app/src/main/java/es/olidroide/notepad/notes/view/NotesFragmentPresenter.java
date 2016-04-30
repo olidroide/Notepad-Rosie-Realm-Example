@@ -10,6 +10,7 @@ import com.karumi.rosie.repository.datasource.paginated.Page;
 import com.karumi.rosie.view.RosiePresenter;
 import es.olidroide.notepad.notes.domain.GetNotes;
 import es.olidroide.notepad.notes.domain.Note;
+import es.olidroide.notepad.notes.domain.SaveNote;
 import es.olidroide.notepad.notes.viewmodel.NoteToNoteViewModel;
 import es.olidroide.notepad.notes.viewmodel.NoteViewModel;
 import java.util.List;
@@ -18,17 +19,19 @@ import javax.inject.Inject;
 public class NotesFragmentPresenter extends RosiePresenter<NotesFragmentPresenter.View> {
     private static final int NUMBER_OF_NOTES_PER_PAGE = 15;
 
+    private final SaveNote saveNote;
     private final GetNotes getNotes;
     private final NoteToNoteViewModel noteToNoteViewModel;
 
     private int offset = 0;
 
-    @Inject public NotesFragmentPresenter(UseCaseHandler useCaseHandler, GetNotes getNotes,
+    @Inject public NotesFragmentPresenter(UseCaseHandler useCaseHandler, GetNotes getNotes, SaveNote saveNote,
         NoteToNoteViewModel noteToNoteViewModel) {
         super(useCaseHandler);
 
         this.noteToNoteViewModel = noteToNoteViewModel;
         this.getNotes = getNotes;
+        this.saveNote = saveNote;
     }
 
     @Override public void initialize() {
@@ -84,6 +87,16 @@ public class NotesFragmentPresenter extends RosiePresenter<NotesFragmentPresente
     //FROM NoteRenderer
     public void onNoteClick(NoteViewModel noteViewModel) {
         Log.d(getClass().getCanonicalName(), "onNoteClick " + noteViewModel.toString());
+        final Note note = new Note.Builder().setKey(noteViewModel.getKey()).setNote(noteViewModel.getNote()).build();
+        createUseCaseCall(saveNote).args(note).onSuccess(new OnSuccessCallback() {
+            @Success public void onNoteSaved() {
+                loadNotes();
+            }
+        }).onError(new OnErrorCallback() {
+            @Override public boolean onError(Error error) {
+                return false;
+            }
+        }).execute();
     }
 
     public void onLoadMore() {

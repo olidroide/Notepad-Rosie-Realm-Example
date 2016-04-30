@@ -12,6 +12,10 @@ public class NoteViewModel {
         this.note = builder.note;
     }
 
+    public String getKey() {
+        return key;
+    }
+
     @Override public String toString() {
         return note;
     }

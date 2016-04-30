@@ -1,8 +1,10 @@
 package es.olidroide.notepad.notes.repository;
 
 import com.karumi.rosie.repository.PaginatedRosieRepository;
+import com.karumi.rosie.repository.datasource.WriteableDataSource;
 import com.karumi.rosie.repository.datasource.paginated.PaginatedCacheDataSource;
 import com.karumi.rosie.repository.datasource.paginated.PaginatedReadableDataSource;
+import com.karumi.rosie.repository.datasource.paginated.PaginatedWriteableDataSource;
 import es.olidroide.notepad.notes.domain.Note;
 import javax.inject.Inject;
 
@@ -17,5 +19,8 @@ public class NotesRepository extends PaginatedRosieRepository<String, Note> {
         PaginatedReadableDataSource<String, Note> noteDataSource = notesDataSourceFactory.createDataSource();
         addReadableDataSources(noteDataSource);
         addPaginatedReadableDataSources(noteDataSource);
+        //addWriteableDataSources(noteDataSource);
     }
+
+
 }
