@@ -40,9 +40,12 @@ dependencies {
   compile 'com.android.support:support-v13:23.3.0'
   compile 'com.android.support:design:23.3.0'
 
+  //Required for Rosie
   compile 'com.karumi.rosie:rosie:2.1.0'
   provided 'com.squareup.dagger:dagger-compiler:1.2.2'
 
+  //For dividers of lists
+  compile 'com.bignerdranch.android:simple-item-decoration:1.0.0'
 }
 
 configurations.all {

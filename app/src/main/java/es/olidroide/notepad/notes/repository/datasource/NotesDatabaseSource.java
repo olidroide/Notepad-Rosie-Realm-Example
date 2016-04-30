@@ -23,13 +23,12 @@ public class NotesDatabaseSource extends EmptyPaginatedReadableDataSource<String
     private Map<String, Note> getListNotes() {
         Map<String, Note> notes = new ArrayMap();
 
-        Note.Builder noteBuilder = new Note.Builder();
-        noteBuilder.setKey("1").setName("1").setNote("1");
-        notes.put("1", noteBuilder.build());
-
-        noteBuilder = new Note.Builder();
-        noteBuilder.setKey("2").setName("2").setNote("2");
-        notes.put("2", noteBuilder.build());
+        for (int i = 0; i < 100; i++) {
+            Note.Builder noteBuilder = new Note.Builder();
+            String value = String.valueOf(i + 1);
+            noteBuilder.setKey(value).setName(value).setNote(value);
+            notes.put(value, noteBuilder.build());
+        }
 
         return notes;
     }

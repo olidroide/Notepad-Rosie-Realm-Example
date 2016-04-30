@@ -19,8 +19,8 @@ public class GetNotes extends RosieUseCase {
     }
 
     public PaginatedCollection<Note> getAllNotesInCache() {
-
         Collection<Note> all;
+
         try {
             all = notesRepository.getAll(ReadPolicy.CACHE_ONLY);
         } catch (Exception e) {
@@ -33,11 +33,11 @@ public class GetNotes extends RosieUseCase {
 
         Page page = Page.withOffsetAndLimit(0, all.size());
 
-        PaginatedCollection<Note> comics = new PaginatedCollection<>(all);
-        comics.setPage(page);
-        comics.setHasMore(true);
+        PaginatedCollection<Note> notes = new PaginatedCollection<>(all);
+        notes.setPage(page);
+        notes.setHasMore(true);
 
-        return comics;
+        return notes;
     }
 
     @UseCase public void getNotes(Page page) throws Exception {

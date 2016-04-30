@@ -1,5 +1,6 @@
 package es.olidroide.notepad.notes.view;
 
+import android.util.Log;
 import com.karumi.rosie.domain.usecase.UseCaseHandler;
 import com.karumi.rosie.domain.usecase.annotation.Success;
 import com.karumi.rosie.domain.usecase.callback.OnSuccessCallback;
@@ -34,6 +35,7 @@ public class NotesFragmentPresenter extends RosiePresenter<NotesFragmentPresente
         super.initialize();
     }
 
+    //OnResume
     @Override public void update() {
         super.update();
         getView().showLoading();
@@ -42,14 +44,23 @@ public class NotesFragmentPresenter extends RosiePresenter<NotesFragmentPresente
         if (allNotesInCache.getPage().getLimit() == 0) {
             loadNotes();
         } else {
-            //getView().clearCharacters();
+            getView().clearCharacters();
             showNotes(allNotesInCache);
-            //offset = allNotesInCache.getItems().size();
+            offset = allNotesInCache.getItems().size();
         }
+    }
+
+    @Override public void pause() {
+        super.pause();
+    }
+
+    @Override public void destroy() {
+        super.destroy();
     }
 
     private void showNotes(PaginatedCollection<Note> notes) {
         getView().updateNotes(noteToNoteViewModel.mapNotesToNoteViewModels(notes));
+        getView().showHasMore(notes.hasMore());
         getView().hideLoading();
     }
 
@@ -70,12 +81,13 @@ public class NotesFragmentPresenter extends RosiePresenter<NotesFragmentPresente
             .execute();
     }
 
-    @Override public void pause() {
-        super.pause();
+    //FROM NoteRenderer
+    public void onNoteClick(NoteViewModel noteViewModel) {
+        Log.d(getClass().getCanonicalName(), "onNoteClick " + noteViewModel.toString());
     }
 
-    @Override public void destroy() {
-        super.destroy();
+    public void onLoadMore() {
+        loadNotes();
     }
 
     public interface View extends RosiePresenter.View {
@@ -84,5 +96,9 @@ public class NotesFragmentPresenter extends RosiePresenter<NotesFragmentPresente
         void hideLoading();
 
         void showLoading();
+
+        void clearCharacters();
+
+        void showHasMore(boolean b);
     }
 }
