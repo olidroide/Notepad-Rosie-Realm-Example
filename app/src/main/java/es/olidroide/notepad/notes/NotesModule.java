@@ -8,6 +8,7 @@ import dagger.Module;
 import dagger.Provides;
 import es.olidroide.notepad.notes.domain.Note;
 import es.olidroide.notepad.notes.repository.datasource.NotesDatabaseSource;
+import es.olidroide.notepad.notes.repository.datasource.NotesWritableDatabaseSource;
 import es.olidroide.notepad.notes.view.NotesActivity;
 import es.olidroide.notepad.notes.view.NotesFragment;
 import javax.inject.Singleton;
@@ -40,5 +41,9 @@ public class NotesModule {
 
     @Provides public NotesDatabaseSource providesNotesDataBaseSource() {
         return new NotesDatabaseSource(context);
+    }
+
+    @Provides public NotesWritableDatabaseSource providesNotesWritableDataBaseSource() {
+        return new NotesWritableDatabaseSource(context);
     }
 }

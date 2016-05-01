@@ -21,6 +21,8 @@ public class NotesRepository extends PaginatedRosieRepository<String, Note> {
         addReadableDataSources(noteApiDataSource, noteDatabaseDataSource);
         addPaginatedReadableDataSources(noteApiDataSource, noteDatabaseDataSource);
 
+        addWriteableDataSources(notesDataSourceFactory.createWritableDatabaseDataSource());
+
         //addWriteableDataSources(noteDataSource);
     }
 

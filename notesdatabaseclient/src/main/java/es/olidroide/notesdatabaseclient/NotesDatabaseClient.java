@@ -3,8 +3,10 @@ package es.olidroide.notesdatabaseclient;
 import android.content.Context;
 import io.realm.Realm;
 import io.realm.RealmAsyncTask;
+import io.realm.RealmModel;
 import io.realm.RealmObject;
 import io.realm.RealmResults;
+import java.util.List;
 
 public class NotesDatabaseClient {
 
@@ -45,6 +47,14 @@ public class NotesDatabaseClient {
 
     public <T extends RealmObject> RealmResults<T> getAll(Class<T> clazz) {
         RealmResults<T> results = getRealm().allObjects(clazz);
+        return results;
+    }
+
+    public <T extends RealmModel> List<T> saveAll(List<T> list) {
+        final Realm realm = getRealm();
+        realm.beginTransaction();
+        List<T> results = realm.copyToRealmOrUpdate(list);
+        realm.commitTransaction();
         return results;
     }
 

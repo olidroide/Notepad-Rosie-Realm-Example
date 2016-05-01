@@ -1,6 +1,5 @@
 package es.olidroide.notepad.notes.view;
 
-import android.content.Context;
 import android.util.Log;
 import com.karumi.rosie.domain.usecase.UseCaseHandler;
 import com.karumi.rosie.domain.usecase.annotation.Success;
@@ -14,6 +13,7 @@ import es.olidroide.notepad.notes.domain.Note;
 import es.olidroide.notepad.notes.domain.SaveNote;
 import es.olidroide.notepad.notes.viewmodel.NoteToNoteViewModel;
 import es.olidroide.notepad.notes.viewmodel.NoteViewModel;
+import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 
@@ -63,7 +63,9 @@ public class NotesFragmentPresenter extends RosiePresenter<NotesFragmentPresente
     }
 
     private void showNotes(PaginatedCollection<Note> notes) {
-        getView().updateNotes(noteToNoteViewModel.mapNotesToNoteViewModels(notes));
+        saveNotes(new ArrayList<>(notes.getItems()));
+        final List<NoteViewModel> noteViewModels = noteToNoteViewModel.mapNotesToNoteViewModels(notes);
+        getView().updateNotes(noteViewModels);
         getView().showHasMore(notes.hasMore());
         getView().hideLoading();
     }
@@ -71,9 +73,9 @@ public class NotesFragmentPresenter extends RosiePresenter<NotesFragmentPresente
     private void loadNotes() {
         createUseCaseCall(getNotes).args(Page.withOffsetAndLimit(offset, NUMBER_OF_NOTES_PER_PAGE))
             .onSuccess(new OnSuccessCallback() {
-                @Success public void onNotesLoaded(PaginatedCollection<Note> characters) {
-                    showNotes(characters);
-                    offset = characters.getPage().getOffset() + NUMBER_OF_NOTES_PER_PAGE;
+                @Success public void onNotesLoaded(PaginatedCollection<Note> notes) {
+                    showNotes(notes);
+                    offset = notes.getPage().getOffset() + NUMBER_OF_NOTES_PER_PAGE;
                 }
             })
             .onError(new OnErrorCallback() {
@@ -83,6 +85,10 @@ public class NotesFragmentPresenter extends RosiePresenter<NotesFragmentPresente
                 }
             })
             .execute();
+    }
+
+    private void saveNotes(List<Note> notes) {
+        createUseCaseCall(saveNote).args(notes).execute();
     }
 
     //FROM NoteRenderer
