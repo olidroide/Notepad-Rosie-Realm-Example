@@ -7,6 +7,7 @@ import com.karumi.rosie.time.TimeProvider;
 import dagger.Module;
 import dagger.Provides;
 import es.olidroide.notepad.notes.domain.Note;
+import es.olidroide.notepad.notes.repository.datasource.NotesDatabaseSource;
 import es.olidroide.notepad.notes.view.NotesActivity;
 import es.olidroide.notepad.notes.view.NotesFragment;
 import javax.inject.Singleton;
@@ -35,5 +36,9 @@ public class NotesModule {
     //Required for NotesDatabaseClient
     @Provides public Context providesContext() {
         return context;
+    }
+
+    @Provides public NotesDatabaseSource providesNotesDataBaseSource() {
+        return new NotesDatabaseSource(context);
     }
 }

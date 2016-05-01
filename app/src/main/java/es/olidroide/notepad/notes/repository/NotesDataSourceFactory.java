@@ -1,22 +1,19 @@
 package es.olidroide.notepad.notes.repository;
 
-import android.content.Context;
 import com.karumi.rosie.repository.datasource.paginated.PaginatedReadableDataSource;
 import es.olidroide.Note.NoteApiClient;
 import es.olidroide.NotesApiConfig;
 import es.olidroide.notepad.notes.domain.Note;
 import es.olidroide.notepad.notes.repository.datasource.NotesApiSource;
 import es.olidroide.notepad.notes.repository.datasource.NotesDatabaseSource;
-import es.olidroide.notesdatabaseclient.Note.NoteDatabaseClient;
-import es.olidroide.notesdatabaseclient.NotesDatabaseConfig;
 import javax.inject.Inject;
 
 public class NotesDataSourceFactory {
 
-    private final Context context;
+    private final NotesDatabaseSource notesDataBaseSource;
 
-    @Inject NotesDataSourceFactory(Context context) {
-        this.context = context;
+    @Inject NotesDataSourceFactory(NotesDatabaseSource notesDatabaseSource) {
+        this.notesDataBaseSource = notesDatabaseSource;
     }
 
     PaginatedReadableDataSource<String, Note> createApiDataSource() {
@@ -27,6 +24,6 @@ public class NotesDataSourceFactory {
     }
 
     PaginatedReadableDataSource<String, Note> createDatabaseDataSource() {
-        return new NotesDatabaseSource(context);
+        return notesDataBaseSource;
     }
 }
