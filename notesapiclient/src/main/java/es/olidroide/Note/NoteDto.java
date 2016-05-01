@@ -9,7 +9,7 @@ public class NoteDto {
 
     public NoteDto(Builder builder) {
         this.id = builder.id;
-        this.note = builder.id;
+        this.note = builder.note;
     }
 
     public String getId() {

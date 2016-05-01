@@ -2,12 +2,12 @@ package es.olidroide.notepad.notes.repository;
 
 import com.karumi.rosie.repository.datasource.WriteableDataSource;
 import com.karumi.rosie.repository.datasource.paginated.PaginatedReadableDataSource;
-import com.karumi.rosie.repository.datasource.paginated.PaginatedWriteableDataSource;
 import es.olidroide.Note.NoteApiClient;
 import es.olidroide.NotesApiConfig;
 import es.olidroide.notepad.notes.domain.Note;
 import es.olidroide.notepad.notes.repository.datasource.NotesApiSource;
 import es.olidroide.notepad.notes.repository.datasource.NotesDatabaseSource;
+import es.olidroide.notepad.notes.repository.datasource.NotesWritableApiSource;
 import es.olidroide.notepad.notes.repository.datasource.NotesWritableDatabaseSource;
 import javax.inject.Inject;
 
@@ -27,6 +27,13 @@ public class NotesDataSourceFactory {
         NoteApiClient noteApiClient = new NoteApiClient(notesApiConfig);
 
         return new NotesApiSource(noteApiClient);
+    }
+
+    WriteableDataSource<String, Note> createApiWritableDataSource() {
+        NotesApiConfig notesApiConfig = NotesApiConfig.with();
+        NoteApiClient noteApiClient = new NoteApiClient(notesApiConfig);
+
+        return new NotesWritableApiSource(noteApiClient);
     }
 
     PaginatedReadableDataSource<String, Note> createDatabaseDataSource() {

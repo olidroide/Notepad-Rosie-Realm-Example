@@ -42,4 +42,11 @@ public class NoteApiClient extends NotesApiClient {
         Call<NotesDto> call = api.getNotes(queryAsMap);
         return execute(call);
     }
+
+    public NoteDto postNote(NoteDto noteDto) throws NotesApiException {
+        NoteApiRest api = getApi(NoteApiRest.class);
+
+        Call<NoteDto> call = api.saveNote(noteDto);
+        return execute(call);
+    }
 }

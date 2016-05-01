@@ -94,7 +94,10 @@ public class NotesFragmentPresenter extends RosiePresenter<NotesFragmentPresente
     //FROM NoteRenderer
     public void onNoteClick(NoteViewModel noteViewModel) {
         Log.d(getClass().getCanonicalName(), "onNoteClick " + noteViewModel.toString());
-        final Note note = new Note.Builder().setKey(noteViewModel.getKey()).setNote(noteViewModel.getNote()).build();
+        final Note note = new Note.Builder().setKey(noteViewModel.getKey())
+            .setNote(String.valueOf(System.currentTimeMillis()))
+            .build();
+
         createUseCaseCall(saveNote).args(note).onSuccess(new OnSuccessCallback() {
             @Success public void onNoteSaved() {
                 loadNotes();
