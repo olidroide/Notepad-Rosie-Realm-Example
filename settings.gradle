@@ -1,1 +1,1 @@
-include ':app', ':notesapiclient'
+include ':app', ':notesapiclient', ':notesdatabaseclient'

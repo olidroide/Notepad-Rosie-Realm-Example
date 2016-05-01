@@ -32,18 +32,22 @@ public class NotesApiSource extends EmptyReadableDataSource<String, Note>
         int offset = page.getOffset();
         int limit = page.getLimit();
 
-        Collection<Note> charactersToReturn = new LinkedList<>();
+        Collection<Note> notesToReturn = new LinkedList<>();
 
         final NotesDto notesDto = noteApiClient.getAll(offset, limit);
+        if (notesDto == null) {
+            return null;
+        }
+
         if (offset < notesDto.getCount()) {
             for (int i = offset; i - offset < limit && i < notesDto.getCount(); i++) {
-                charactersToReturn.add(new NoteToNoteDtoMapper().reverseMap(notesDto.getNotes().get(i)));
+                notesToReturn.add(new NoteToNoteDtoMapper().reverseMap(notesDto.getNotes().get(i)));
             }
         }
 
-        PaginatedCollection<Note> notesPage = new PaginatedCollection<>(charactersToReturn);
+        PaginatedCollection<Note> notesPage = new PaginatedCollection<>(notesToReturn);
         notesPage.setPage(page);
-        notesPage.setHasMore(offset + charactersToReturn.size() < notesDto.getTotal());
+        notesPage.setHasMore(offset + notesToReturn.size() < notesDto.getTotal());
         return notesPage;
     }
 }

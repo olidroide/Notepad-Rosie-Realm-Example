@@ -2,13 +2,11 @@ package es.olidroide.notepad.notes.view;
 
 import android.content.Context;
 import android.content.Intent;
-import com.karumi.rosie.view.Presenter;
 import com.karumi.rosie.view.RosieActivity;
 import es.olidroide.notepad.R;
 import es.olidroide.notepad.notes.NotesModule;
 import java.util.Collections;
 import java.util.List;
-import javax.inject.Inject;
 
 public class NotesActivity extends RosieActivity {
 
@@ -22,6 +20,6 @@ public class NotesActivity extends RosieActivity {
     }
 
     @Override protected List<Object> getActivityScopeModules() {
-        return Collections.singletonList((Object) new NotesModule());
+        return Collections.singletonList((Object) new NotesModule(this));
     }
 }

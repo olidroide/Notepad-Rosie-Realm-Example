@@ -1,5 +1,6 @@
 package es.olidroide.notepad.notes.view;
 
+import android.content.Context;
 import android.util.Log;
 import com.karumi.rosie.domain.usecase.UseCaseHandler;
 import com.karumi.rosie.domain.usecase.annotation.Success;

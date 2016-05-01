@@ -42,7 +42,6 @@ public class NotesApiConfig {
         }
 
         public NotesApiConfig build() {
-
             if (retrofit == null) {
                 retrofit = createDefaultRetrofit(baseUrl, debug);
             }
