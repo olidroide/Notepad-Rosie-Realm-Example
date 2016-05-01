@@ -32,6 +32,7 @@ public class NotesModule {
         return new InMemoryPaginatedCacheDataSource<>(new TimeProvider(), NOTES_IN_MEMORY_CACHE_TTL);
     }
 
+    //Required for NotesDatabaseClient
     @Provides public Context providesContext() {
         return context;
     }

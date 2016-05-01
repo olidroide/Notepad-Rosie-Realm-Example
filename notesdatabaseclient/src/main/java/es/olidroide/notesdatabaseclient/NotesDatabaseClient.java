@@ -1,16 +1,18 @@
 package es.olidroide.notesdatabaseclient;
 
+import android.content.Context;
+import io.realm.Realm;
 import io.realm.RealmAsyncTask;
 import io.realm.RealmObject;
 import io.realm.RealmResults;
 
 public class NotesDatabaseClient {
 
-    private final NotesDatabaseConfig notesDatabaseConfig;
+    private final Context context;
     private RealmAsyncTask asyncTask;
 
-    public NotesDatabaseClient(NotesDatabaseConfig notesDatabaseConfig) {
-        this.notesDatabaseConfig = notesDatabaseConfig;
+    public NotesDatabaseClient(Context context) {
+        this.context = context;
     }
     //
     //public void execute(Realm.Transaction transaction) {
@@ -24,20 +26,25 @@ public class NotesDatabaseClient {
     //    asyncTask = notesDatabaseConfig.getRealm().executeTransactionAsync(transaction, callbackError);
     //}
 
+    private Realm getRealm() {
+        return NotesDatabaseConfig.with(context).getRealm();
+    }
+
     public <T extends RealmObject> T save(T object) {
-        notesDatabaseConfig.getRealm().beginTransaction();
-        T saved = notesDatabaseConfig.getRealm().copyToRealm(object);
-        notesDatabaseConfig.getRealm().commitTransaction();
+        Realm realm = getRealm();
+        realm.beginTransaction();
+        T saved = realm.copyToRealm(object);
+        realm.commitTransaction();
 
         return saved;
     }
 
     public <T extends RealmObject> T getByKey(Class<T> clazz, String key) {
-        return notesDatabaseConfig.getRealm().where(clazz).equalTo("id", key).findFirst();
+        return getRealm().where(clazz).equalTo("id", key).findFirst();
     }
 
     public <T extends RealmObject> RealmResults<T> getAll(Class<T> clazz) {
-        RealmResults<T> results = notesDatabaseConfig.getRealm().where(clazz).findAll();
+        RealmResults<T> results = getRealm().allObjects(clazz);
         return results;
     }
 

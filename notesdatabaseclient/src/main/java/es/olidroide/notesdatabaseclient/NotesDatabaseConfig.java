@@ -6,7 +6,6 @@ import io.realm.RealmConfiguration;
 
 public class NotesDatabaseConfig {
 
-    private static NotesDatabaseConfig singleton;
     private final Realm realm;
 
     public NotesDatabaseConfig(Builder builder) {
@@ -14,19 +13,7 @@ public class NotesDatabaseConfig {
     }
 
     public static NotesDatabaseConfig with(Context context) {
-        if (singleton == null) {
-            singleton = new Builder(context).build();
-        }
-
-        return singleton;
-    }
-
-    public static NotesDatabaseConfig get() {
-        if (singleton == null) {
-            throw new NullPointerException("NotesDatabaseConfig must be first instantiated");
-        }
-
-        return singleton;
+        return new Builder(context).build();
     }
 
     public Realm getRealm() {

@@ -1,15 +1,14 @@
 package es.olidroide.notesdatabaseclient.Note;
 
+import android.content.Context;
 import es.olidroide.notesdatabaseclient.NotesDatabaseClient;
-import es.olidroide.notesdatabaseclient.NotesDatabaseConfig;
 import es.olidroide.notesdatabaseclient.NotesDatabaseException;
-import io.realm.Realm;
 import io.realm.RealmResults;
 
 public class NoteDatabaseClient extends NotesDatabaseClient {
 
-    public NoteDatabaseClient(NotesDatabaseConfig notesDatabaseConfig) {
-        super(notesDatabaseConfig);
+    public NoteDatabaseClient(Context context) {
+        super(context);
     }
 
     //public void saveNote(final NoteRealm noteRealm) {

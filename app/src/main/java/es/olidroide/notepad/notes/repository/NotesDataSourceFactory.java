@@ -27,8 +27,6 @@ public class NotesDataSourceFactory {
     }
 
     PaginatedReadableDataSource<String, Note> createDatabaseDataSource() {
-        NoteDatabaseClient noteDatabaseClient = new NoteDatabaseClient(NotesDatabaseConfig.with(context));
-        //NoteDatabaseClient noteDatabaseClient = new NoteDatabaseClient(NotesDatabaseConfig.get());
-        return new NotesDatabaseSource(noteDatabaseClient);
+        return new NotesDatabaseSource(context);
     }
 }

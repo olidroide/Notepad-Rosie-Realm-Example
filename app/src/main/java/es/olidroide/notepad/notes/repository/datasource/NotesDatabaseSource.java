@@ -20,8 +20,8 @@ public class NotesDatabaseSource extends EmptyReadableDataSource<String, Note>
 
     private final NoteDatabaseClient notesDatabaseClient;
 
-    @Inject public NotesDatabaseSource(NoteDatabaseClient notesDatabaseClient) {
-        this.notesDatabaseClient = notesDatabaseClient;
+    @Inject public NotesDatabaseSource(Context context) {
+        notesDatabaseClient = new NoteDatabaseClient(context);
     }
 
     @Override public Note getByKey(String key) throws Exception {
