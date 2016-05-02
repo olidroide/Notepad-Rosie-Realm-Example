@@ -40,7 +40,7 @@ public class NotesApiSource extends EmptyReadableDataSource<String, Note>
         }
 
         if (offset < notesDto.getCount()) {
-            for (int i = offset; i - offset < limit && i < notesDto.getCount(); i++) {
+            for (int i = offset; i - offset < limit && i < notesDto.getNotes().size(); i++) {
                 notesToReturn.add(new NoteToNoteDtoMapper().reverseMap(notesDto.getNotes().get(i)));
             }
         }
