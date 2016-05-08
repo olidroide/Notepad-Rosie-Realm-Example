@@ -2,16 +2,21 @@ package es.olidroide.notepad.notes.domain;
 
 import android.text.TextUtils;
 import com.karumi.rosie.repository.datasource.Identifiable;
+import java.util.Date;
 
 public class Note implements Identifiable<String> {
     private String key;
-    private String name;
+    private Date createdAt;
     private String note;
 
     public Note(Builder builder) {
         key = builder.key;
-        name = builder.name;
+        createdAt = builder.createdAt;
         note = builder.note;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
     @Override public String getKey() {
@@ -20,15 +25,6 @@ public class Note implements Identifiable<String> {
 
     public Note setKey(String key) {
         this.key = key;
-        return this;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Note setName(String name) {
-        this.name = name;
         return this;
     }
 
@@ -43,7 +39,7 @@ public class Note implements Identifiable<String> {
 
     public static class Builder {
         private String key;
-        private String name;
+        private Date createdAt;
         private String note;
 
         public static Builder create() {
@@ -55,19 +51,19 @@ public class Note implements Identifiable<String> {
             return this;
         }
 
-        public Builder setName(String name) {
-            this.name = name;
-            return this;
-        }
-
         public Builder setNote(String note) {
             this.note = note;
             return this;
         }
 
+        public Builder setCreatedAt(Date createdAt) {
+            this.createdAt = createdAt;
+            return this;
+        }
+
         public Builder setNote(Note note) {
             this.key = note.getKey();
-            this.name = note.getName();
+            this.createdAt = note.getCreatedAt();
             this.note = note.getNote();
 
             return this;

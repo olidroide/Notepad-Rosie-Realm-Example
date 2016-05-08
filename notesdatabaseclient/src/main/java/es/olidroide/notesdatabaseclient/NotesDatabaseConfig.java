@@ -25,7 +25,7 @@ public class NotesDatabaseConfig {
         private Realm realm;
 
         public Builder(Context context) {
-            realmConfig = new RealmConfiguration.Builder(context).build();
+            realmConfig = new RealmConfiguration.Builder(context).deleteRealmIfMigrationNeeded().build();
         }
 
         public NotesDatabaseConfig build() {

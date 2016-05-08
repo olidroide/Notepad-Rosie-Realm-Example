@@ -11,7 +11,11 @@ public class NoteToNoteDtoMapper extends Mapper<Note, NoteDto> {
     }
 
     @Override public Note reverseMap(NoteDto noteDto) {
-        final Note note = Note.Builder.create().setNote(noteDto.getNote()).setKey(noteDto.getId()).build();
+        final Note note = Note.Builder.create()
+            .setNote(noteDto.getNote())
+            .setCreatedAt(noteDto.getCreatedAt())
+            .setKey(noteDto.getId())
+            .build();
         return note;
     }
 }

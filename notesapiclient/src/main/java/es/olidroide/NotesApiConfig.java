@@ -1,5 +1,7 @@
 package es.olidroide;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.logging.HttpLoggingInterceptor;
 import retrofit.GsonConverterFactory;
@@ -57,9 +59,13 @@ public class NotesApiConfig {
                 client.interceptors().add(interceptor);
             }
 
+            Gson gson = new GsonBuilder()
+                .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+                .create();
+
             Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl)
                 .client(client)
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 
             return retrofit;

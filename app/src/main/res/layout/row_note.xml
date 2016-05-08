@@ -6,6 +6,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="@dimen/list_item_height"
+    android:padding="@dimen/row_padding"
+
     >
 
     <TextView
@@ -13,9 +15,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="12sp"
-        android:padding="@dimen/row_padding"
 
         tools:text="test"
+        />
+    <TextView
+        android:id="@+id/row_note_created_at"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:textStyle="italic"
+
+        tools:text="2015"
         />
 
 </LinearLayout>

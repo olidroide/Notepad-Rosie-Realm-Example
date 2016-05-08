@@ -12,7 +12,7 @@ public class NotesToNotesRealmMapper extends Mapper<List<Note>, List<NoteRealm>>
 
         NoteRealm noteRealm;
         for (Note note : noteList) {
-            noteRealm = new NoteRealm().setId(note.getKey()).setNote(note.getNote());
+            noteRealm = new NoteRealm().setId(note.getKey()).setCreatedAt(note.getCreatedAt()).setNote(note.getNote());
             noteRealmList.add(noteRealm);
         }
 

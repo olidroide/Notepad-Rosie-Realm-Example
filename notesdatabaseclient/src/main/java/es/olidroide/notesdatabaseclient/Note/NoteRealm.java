@@ -3,11 +3,13 @@ package es.olidroide.notesdatabaseclient.Note;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.Required;
+import java.util.Date;
 
 public class NoteRealm extends RealmObject {
 
     @PrimaryKey private String id;
     @Required private String note;
+    private Date createdAt;
 
     //Required by Realm
     public NoteRealm() {
@@ -17,6 +19,16 @@ public class NoteRealm extends RealmObject {
     public NoteRealm(Builder builder) {
         this.id = builder.id;
         this.note = builder.note;
+        this.createdAt = builder.createdAt;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public NoteRealm setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+        return this;
     }
 
     public String getId() {
@@ -45,6 +57,7 @@ public class NoteRealm extends RealmObject {
     public static class Builder {
         private String id;
         private String note;
+        private Date createdAt;
 
         public static Builder create() {
             return new Builder();
@@ -57,6 +70,11 @@ public class NoteRealm extends RealmObject {
 
         public Builder setNote(String note) {
             this.note = note;
+            return this;
+        }
+
+        public Builder setCreatedAt(Date createdAt) {
+            this.createdAt = createdAt;
             return this;
         }
 

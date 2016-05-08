@@ -1,15 +1,21 @@
 package es.olidroide.Note;
 
 import com.google.gson.annotations.SerializedName;
+import java.util.Date;
 
 public class NoteDto {
 
     @SerializedName("id") private String id;
     @SerializedName("note") private String note;
+    @SerializedName("created_at") private Date createdAt;
 
     public NoteDto(Builder builder) {
         this.id = builder.id;
         this.note = builder.note;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
     public String getId() {

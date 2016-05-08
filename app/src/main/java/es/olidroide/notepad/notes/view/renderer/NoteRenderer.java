@@ -16,6 +16,7 @@ public class NoteRenderer extends RosieRenderer<NoteViewModel> {
     private final NotesFragmentPresenter notesFragmentPresenter;
 
     @Bind(R.id.row_note_text) TextView noteText;
+    @Bind(R.id.row_note_created_at) TextView noteCreatedAtText;
 
     public NoteRenderer(NotesFragmentPresenter notesFragmentPresenter) {
         this.notesFragmentPresenter = notesFragmentPresenter;
@@ -27,6 +28,7 @@ public class NoteRenderer extends RosieRenderer<NoteViewModel> {
         final NoteViewModel noteViewModel = getContent();
 
         noteText.setText(noteViewModel.getNote());
+        noteCreatedAtText.setText(noteViewModel.getCreatedAt());
     }
 
     @OnClick(R.id.row_note_root) public void onNoteClick() {
