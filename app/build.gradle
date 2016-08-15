@@ -1,18 +1,10 @@
-buildscript {
-  repositories {
-    jcenter()
-    mavenCentral()
-    maven { url "https://jitpack.io" }
-  }
-}
-
 apply plugin: 'com.android.application'
 
 def preDexEnabled = "true".equals(System.getProperty("pre-dex", "true"))
 
 android {
-  compileSdkVersion 23
-  buildToolsVersion "23.0.3"
+  compileSdkVersion 24
+  buildToolsVersion "24.0.1"
 
   dexOptions {
     preDexLibraries = preDexEnabled
@@ -21,7 +13,7 @@ android {
   defaultConfig {
     applicationId "es.olidroide.notepad"
     minSdkVersion 19
-    targetSdkVersion 23
+    targetSdkVersion 24
     versionCode 1
     versionName "1.0"
   }
@@ -38,9 +30,9 @@ dependencies {
   compile project(path: ':notesapiclient')
   compile project(path: ':notesdatabaseclient')
   testCompile 'junit:junit:4.12'
-  compile 'com.android.support:appcompat-v7:23.3.0'
-  compile 'com.android.support:support-v13:23.3.0'
-  compile 'com.android.support:design:23.3.0'
+  compile 'com.android.support:appcompat-v7:24.1.1'
+  compile 'com.android.support:support-v13:24.1.1'
+  compile 'com.android.support:design:24.1.1'
 
   //Required for Rosie
   compile 'com.karumi.rosie:rosie:2.1.0'
@@ -51,5 +43,5 @@ dependencies {
 }
 
 configurations.all {
-  resolutionStrategy.force 'com.android.support:support-annotations:23.0.1'
+  resolutionStrategy.force 'com.android.support:support-annotations:24.1.1'
 }
