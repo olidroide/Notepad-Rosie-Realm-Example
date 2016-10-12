@@ -4,7 +4,7 @@ def preDexEnabled = "true".equals(System.getProperty("pre-dex", "true"))
 
 android {
   compileSdkVersion 24
-  buildToolsVersion "24.0.1"
+  buildToolsVersion "24.0.3"
 
   dexOptions {
     preDexLibraries = preDexEnabled
@@ -30,9 +30,9 @@ dependencies {
   compile project(path: ':notesapiclient')
   compile project(path: ':notesdatabaseclient')
   testCompile 'junit:junit:4.12'
-  compile 'com.android.support:appcompat-v7:24.1.1'
-  compile 'com.android.support:support-v13:24.1.1'
-  compile 'com.android.support:design:24.1.1'
+  compile 'com.android.support:appcompat-v7:24.2.1'
+  compile 'com.android.support:support-v13:24.2.1'
+  compile 'com.android.support:design:24.2.1'
 
   //Required for Rosie
   compile 'com.karumi.rosie:rosie:2.1.0'
